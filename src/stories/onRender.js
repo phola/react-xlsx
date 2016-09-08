@@ -2,7 +2,7 @@ import React from 'react';
 import { storiesOf, action } from '@kadira/storybook';
 import Button from '../index';
 import WorkBook from '../WorkBook'
-import XCell from '../XCell'
+import Cell from '../Cell'
 import Sheet from '../Sheet'
 
 storiesOf('WorkBook', module).add(
@@ -17,11 +17,11 @@ storiesOf('WorkBook', module).add(
         <WorkBook ref='wb' fileName='bob.xlsx' render renderXLSX defaultCellStyle={defaultCellStyle} onXLSXRendered={handleXLSX}>
           <Sheet name='woooo'>
             <div>bob</div>
-            <XCell row={0} col={1}><div><div>nested</div></div></XCell>
+            <Cell row={0} col={1}><div><div>nested</div></div></Cell>
           </Sheet>
           <Sheet name='hoooo'>
-            <XCell row={1} col={2} style={{font:{bold:true}}}>I am bold</XCell>
-            <XCell cellRef='C9'>plain string</XCell>
+            <Cell row={1} col={2} style={{font:{bold:true}}}>I am bold</Cell>
+            <Cell cellRef='C9'>plain string</Cell>
           </Sheet>
         </WorkBook>
         </div>

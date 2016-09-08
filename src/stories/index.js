@@ -1,9 +1,6 @@
 import React from 'react';
 import { storiesOf, action } from '@kadira/storybook';
-import WorkBook from '../WorkBook'
-import XCell from '../XCell'
-import Sheet from '../Sheet'
-import XTrigger from '../XTrigger'
+import { WorkBook, Sheet, Cell, XTrigger } from '../index'
 import FileSaver from 'file-saver'
 import { simple } from '../instances'
 
@@ -24,7 +21,7 @@ storiesOf('WorkBook', module).addWithInfo(
           FileSaver.saveAs(blob, 'formulae.xlsx')
         };
         return (
-          <WorkBook render='only trigger'><div>ts</div></WorkBook>
+          <WorkBook><div>ts</div></WorkBook>
         )
       }).addWithInfo(
       'with style',
@@ -36,10 +33,10 @@ storiesOf('WorkBook', module).addWithInfo(
         };
         return (
           <WorkBook defaultCellStyle={defaultCellStyle} onXLSXGenerated={handleXLSX} onlyRenderTrigger={true}>
-            <XCell row={0} col={1} type='n'>0.1</XCell>
-            <XCell row={1} col={1} type='n'>2.3</XCell>
-            <XCell row={1} col={2}>2.3</XCell>
-            <XCell cellRef='B3' formula={true}>B1+B2</XCell>
+            <Cell row={0} col={1} type='n'>0.1</Cell>
+            <Cell row={1} col={1} type='n'>2.3</Cell>
+            <Cell row={1} col={2}>2.3</Cell>
+            <Cell cellRef='B3' formula={true}>B1+B2</Cell>
             <XTrigger action='onClick'>
               <button>get XLSX</button>
             </XTrigger>
@@ -56,18 +53,18 @@ storiesOf('WorkBook', module).addWithInfo(
           };
           return (
             <WorkBook defaultCellStyle={defaultCellStyle} onXLSXGenerated={handleXLSX} >
-              <h1><XCell cellRef='A1' colSpan={3}>Kites</XCell></h1>
-              <p> <XCell cellRef='A2' colSpan={3}>Blah Blah</XCell> </p>
+              <h1><Cell cellRef='A1' colSpan={3}>Kites</Cell></h1>
+              <p> <Cell cellRef='A2' colSpan={3}>Blah Blah</Cell> </p>
             <table border={1}>
               <tr>
-                <td><XCell row={2} col={0}>Naish</XCell></td>
-                <td><XCell row={2} col={1}>Cabrihna</XCell></td>
-                <td><XCell row={2} col={2}>Best</XCell></td>
+                <td><Cell row={2} col={0}>Naish</Cell></td>
+                <td><Cell row={2} col={1}>Cabrihna</Cell></td>
+                <td><Cell row={2} col={2}>Best</Cell></td>
               </tr>
               <tr>
-                <td><XCell row={3} col={0}>Naish</XCell></td>
-                <td><XCell row={3} col={1}>Naish</XCell></td>
-                <td><XCell row={3} col={2}>Naish</XCell></td>
+                <td><Cell row={3} col={0}>Naish</Cell></td>
+                <td><Cell row={3} col={1}>Naish</Cell></td>
+                <td><Cell row={3} col={2}>Naish</Cell></td>
               </tr>
             </table>
             <XTrigger action='onClick'>

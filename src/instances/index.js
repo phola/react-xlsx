@@ -1,22 +1,18 @@
 import React from 'react'
-import WorkBook from '../WorkBook'
-import XCell from '../XCell'
-import Sheet from '../Sheet'
-import XTrigger from '../XTrigger'
+import { WorkBook, Sheet, Cell, XTrigger } from '../index'
 import FileSaver from 'file-saver'
 
 const defaultCellStyle = { font: { name: 'Verdana', sz: 11, color: 'FF00FF88' }, fill: { fgColor: { rgb: 'FFFFAA00' } } }
 
 const handleXLSX = (blob) => {
   console.log(blob)
-  debugger
   FileSaver.saveAs(blob, 'test.xlsx')
 }
 
 export const simple = () => {
-  return (<WorkBook defaultCellStyle={defaultCellStyle} onXLSXGenerated={handleXLSX}>
+  return (<WorkBook defaultCellStyle={defaultCellStyle} onXLSXGenerated={handleXLSX} render='trigger'>
             <Sheet name='woooo'>
-              <XCell
+              <Cell
                 row={0}
                 col={1}
                 colSpan={2}
@@ -26,15 +22,15 @@ export const simple = () => {
                     nested
                   </div>
                 </div>
-              </XCell>
+              </Cell>
             </Sheet>
             <Sheet name='hoooo'>
-              <XCell row={1} col={2} cellStyle={{font: {bold: true}}}>
+              <Cell row={1} col={2} cellStyle={{font: {bold: true}}}>
                 I am bold
-              </XCell>
-              <XCell cellRef='C9'>
+              </Cell>
+              <Cell cellRef='C9'>
                 plain string
-              </XCell>
+              </Cell>
             </Sheet>
             <XTrigger action='onClick'>
               <button>

@@ -1,5 +1,5 @@
 import React from 'react';
-import WorkBook from '../WorkBook';
+import { WorkBook } from '../index';
 import { simple } from '../instances'
 import renderer from 'react-test-renderer';
 

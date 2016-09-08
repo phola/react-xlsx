@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-class XCell extends Component {
+export class Cell extends Component {
   static propTypes = {
     row: React.PropTypes.number,
     col: React.PropTypes.number,
@@ -15,5 +15,3 @@ class XCell extends Component {
     return children
   }
 }
-
-export default XCell;

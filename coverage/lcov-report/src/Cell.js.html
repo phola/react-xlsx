@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en">
 <head>
-    <title>Code coverage report for src/reactUtils.js</title>
+    <title>Code coverage report for src/Cell.js</title>
     <meta charset="utf-8" />
     <link rel="stylesheet" href="..\prettify.css" />
     <link rel="stylesheet" href="..\base.css" />
@@ -16,32 +16,32 @@
 <div class='wrapper'>
   <div class='pad1'>
     <h1>
-      <a href="..\index.html">All files</a> / <a href="index.html">src</a> reactUtils.js
+      <a href="..\index.html">All files</a> / <a href="index.html">src</a> Cell.js
     </h1>
     <div class='clearfix'>
       <div class='fl pad1y space-right2'>
-        <span class="strong">100% </span>
+        <span class="strong">0% </span>
         <span class="quiet">Statements</span>
-        <span class='fraction'>14/14</span>
+        <span class='fraction'>0/4</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">100% </span>
+        <span class="strong">0% </span>
         <span class="quiet">Branches</span>
-        <span class='fraction'>16/16</span>
+        <span class='fraction'>0/2</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">100% </span>
+        <span class="strong">0% </span>
         <span class="quiet">Functions</span>
-        <span class='fraction'>4/4</span>
+        <span class='fraction'>0/1</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">100% </span>
+        <span class="strong">0% </span>
         <span class="quiet">Lines</span>
-        <span class='fraction'>14/14</span>
+        <span class='fraction'>0/3</span>
       </div>
     </div>
   </div>
-  <div class='status-line high'></div>
+  <div class='status-line low'></div>
 <pre><table class="coverage">
 <tr><td class="line-count quiet">1
 2
@@ -60,63 +60,39 @@
 15
 16
 17
-18
-19
-20
-21
-22
-23
-24
-25
-26</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">66x</span>
-<span class="cline-any cline-yes">83x</span>
-<span class="cline-any cline-yes">19x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">83x</span>
-<span class="cline-any cline-yes">56x</span>
+18</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">66x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">10x</span>
-<span class="cline-any cline-yes">10x</span>
-<span class="cline-any cline-yes">6x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">10x</span>
-<span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">10x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import React from 'react';
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import React, { Component } from 'react';
 &nbsp;
-export const deepFilterByComponentType = (children, type, results = []) =&gt; {
-  React.Children.forEach(children, child =&gt; {
-    if (child.type === type) {
-      results.push(child)
-    }
-    if (child &amp;&amp; child.props &amp;&amp; child.props.children) {
-      deepFilterByComponentType(child.props.children, type, results)
-    }
-  })
-  return results
-}
+export class Cell extends Component {
+  static propTypes = {
+    row: React.PropTypes.number,
+    col: React.PropTypes.number,
+    cellRef: React.PropTypes.string,
+    children: React.PropTypes.node,
+    cellStyle: React.PropTypes.object
+  };
 &nbsp;
-export const deepFilterByType = (children, type, results = []) =&gt; {
-  React.Children.forEach(children, child =&gt; {
-    if (typeof child === type) {
-      results.push(child)
-    }
-    if (child &amp;&amp; child.props &amp;&amp; child.props.children) {
-      deepFilterByType(child.props.children, type, results)
-    }
-  })
-  return results
+<span class="fstat-no" title="function not covered" >  re</span>nder() {
+    const { children } = <span class="cstat-no" title="statement not covered" >this.props</span>
+<span class="cstat-no" title="statement not covered" >    if (typeof children === 'string') <span class="cstat-no" title="statement not covered" >return &lt;span&gt;{children}&lt;/span&gt;</span></span>
+<span class="cstat-no" title="statement not covered" >    return children</span>
+  }
 }
 &nbsp;</pre></td></tr>
 </table></pre>

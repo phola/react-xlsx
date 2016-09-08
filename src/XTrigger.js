@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-class XTrigger extends Component {
+export class XTrigger extends Component {
   static propTypes = {
     action: React.PropTypes.string,
     children: React.PropTypes.object
@@ -12,5 +12,3 @@ class XTrigger extends Component {
     return children
   }
 }
-
-export default XTrigger;

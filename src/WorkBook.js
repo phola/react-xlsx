@@ -2,11 +2,9 @@ import React, { Component } from 'react'
 import XLSX from 'xlsx-style'
 import s2ab from './s2ab'
 import { deepFilterByComponentType, deepFilterByType } from './reactUtils'
-import Sheet from './Sheet'
-import XCell from './XCell'
-import XTrigger from './XTrigger'
+import { Sheet, Cell, XTrigger } from './index'
 
-class WorkBook extends Component {
+export class WorkBook extends Component {
 
   updateRange (row, col, range) {
     if (range.s.r > row) { range.s.r = row }
@@ -61,7 +59,7 @@ class WorkBook extends Component {
     var mapped = { Sheets: {}, SheetNames: [] }
     sheets.forEach(sheet => {
       const { name, children } = sheet.props
-      var cells = deepFilterByComponentType(children, XCell)
+      var cells = deepFilterByComponentType(children, Cell)
       mapped.Sheets[name] = this.mapCells(cells)
       mapped.SheetNames.push(name)
     })
@@ -76,7 +74,7 @@ class WorkBook extends Component {
       wb = this.mapSheets(sheets)
       wb.Props = { Title: title, Author: author }
     }else {
-      var cells = deepFilterByComponentType(children, XCell)
+      var cells = deepFilterByComponentType(children, Cell)
       if (cells.length > 0) {
         wb.SheetNames = ['Sheet1']
         wb.Sheets = {}
@@ -119,7 +117,7 @@ class WorkBook extends Component {
             onXLSXGenerated(this.generateXLSX())}
           return React.cloneElement(child.props.children, triggerEvent)
         }else {
-          if (render != 'only trigger') return child
+          if (render != 'trigger') return child
         }
       }
     )
@@ -136,10 +134,10 @@ WorkBook.propTypes = {
   ]),
   children: (props, propName, componentName , ...rest) => {
     var prop = props[propName]
-    if (deepFilterByComponentType(prop, XCell).length === 0) {
+    if (deepFilterByComponentType(prop, Cell).length === 0) {
       return new Error(
         '`' + componentName + '` ' +
-        'should have at leact one descendant XCell component'
+        'should have at leact one descendant Cell component'
       )
     }
   }
@@ -150,5 +148,3 @@ WorkBook.defaultProps = {
   author: 'react-xlsx',
   render: true
 }
-
-export default WorkBook

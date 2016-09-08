@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-class Sheet extends Component {
+export class Sheet extends Component {
   static propTypes = {
     name: React.PropTypes.string,
     children: React.PropTypes.node
@@ -12,5 +12,3 @@ class Sheet extends Component {
     return <div>{children}</div>
   }
 }
-
-export default Sheet;
