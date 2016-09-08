@@ -1,0 +1,527 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for src/WorkBook.js</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="..\prettify.css" />
+    <link rel="stylesheet" href="..\base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(..\sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class='wrapper'>
+  <div class='pad1'>
+    <h1>
+      <a href="..\index.html">All files</a> / <a href="index.html">src</a> WorkBook.js
+    </h1>
+    <div class='clearfix'>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">85.9% </span>
+        <span class="quiet">Statements</span>
+        <span class='fraction'>67/78</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">72.92% </span>
+        <span class="quiet">Branches</span>
+        <span class='fraction'>35/48</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">78.57% </span>
+        <span class="quiet">Functions</span>
+        <span class='fraction'>11/14</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">87.32% </span>
+        <span class="quiet">Lines</span>
+        <span class='fraction'>62/71</span>
+      </div>
+    </div>
+  </div>
+  <div class='status-line high'></div>
+<pre><table class="coverage">
+<tr><td class="line-count quiet">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">7x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import React, { Component } from 'react'
+import XLSX from 'xlsx-style'
+import s2ab from './s2ab'
+import { deepFilterByComponentType, deepFilterByType } from './reactUtils'
+import Sheet from './Sheet'
+import XCell from './XCell'
+import XTrigger from './XTrigger'
+&nbsp;
+class WorkBook extends Component {
+&nbsp;
+  updateRange (row, col, range) {
+    if (range.s.r &gt; row) { range.s.r = row }
+    if (range.s.c &gt; col) { range.s.c = col }
+    if (range.e.r &lt; row) { range.e.r = row }
+    if (range.e.c &lt; col) { range.e.c = col }
+    return range
+  }
+&nbsp;
+  mapCells (cells) {
+    var mapped = {}
+    var merges = []
+    <span class="missing-if-branch" title="else path not taken" >E</span>if (cells.length &gt; 0) {
+      var range = {s: {c: 10000000, r: 10000000}, e: {c: 0, r: 0}}
+      cells.forEach(cell =&gt; {
+        var { cellRef, col, row, colSpan, rowSpan, children, cellStyle = {}, type = 's', formula } = cell.props
+        var cell_ref
+        if (cellRef) {
+          var { r: row, c: col } = XLSX.utils.decode_cell(cellRef)
+          cell_ref = cellRef
+        } else {
+          cell_ref = XLSX.utils.encode_cell({c: col, r: row})
+        }
+        range = this.updateRange(row, col, range)
+        if (colSpan || rowSpan) {
+          colSpan = colSpan ? colSpan : <span class="branch-1 cbranch-no" title="branch not covered" >1</span>
+          rowSpan = rowSpan ? rowSpan : <span class="branch-1 cbranch-no" title="branch not covered" >1</span>
+          var merge = { s: { c: col, r: row }, e: { c: col + colSpan - 1, r: row + rowSpan - 1 } }
+          merges.push(merge)
+        }
+        var values = children ? deepFilterByType(children, 'string') : <span class="branch-1 cbranch-no" title="branch not covered" >[]</span>
+        <span class="missing-if-branch" title="else path not taken" >E</span>if (values.length &gt; 0) {
+          mapped[cell_ref] = {
+            t: type,
+            s: cellStyle
+            // c: [{a: 'comment.author', t: 'comment.t', r: 'comment.r'}]
+          }
+          // formulas not supported at the mo
+          <span class="missing-if-branch" title="if path not taken" >I</span>if (formula) {
+<span class="cstat-no" title="statement not covered" >            mapped[cell_ref].f = values[0]</span>
+          }else {
+            mapped[cell_ref].v = values[0]
+          }
+        }
+      })
+      mapped = Object.assign(mapped, {'!ref': XLSX.utils.encode_range(range)}, {'!merges': merges})
+    }
+    return mapped
+  }
+&nbsp;
+  mapSheets (sheets) {
+    var mapped = { Sheets: {}, SheetNames: [] }
+    sheets.forEach(sheet =&gt; {
+      const { name, children } = sheet.props
+      var cells = deepFilterByComponentType(children, XCell)
+      mapped.Sheets[name] = this.mapCells(cells)
+      mapped.SheetNames.push(name)
+    })
+    return mapped
+  }
+&nbsp;
+  createWorkBook () {
+    const { children, title, author } = this.props
+    var wb = {}
+    var sheets = deepFilterByComponentType(children, Sheet)
+    <span class="missing-if-branch" title="else path not taken" >E</span>if (sheets.length &gt; 0) {
+      wb = this.mapSheets(sheets)
+      wb.Props = { Title: title, Author: author }
+    }else {
+      var cells = <span class="cstat-no" title="statement not covered" >deepFilterByComponentType(children, XCell)</span>
+<span class="cstat-no" title="statement not covered" >      if (cells.length &gt; 0) {</span>
+<span class="cstat-no" title="statement not covered" >        wb.SheetNames = ['Sheet1']</span>
+<span class="cstat-no" title="statement not covered" >        wb.Sheets = {}</span>
+<span class="cstat-no" title="statement not covered" >        wb.Sheets['Sheet1'] = this.mapCells(cells)</span>
+      }
+    }
+    return wb
+  }
+&nbsp;
+  writeXLSX (wb) {
+    const { defaultCellStyle } = this.props
+    var wopts = { bookType: 'xlsx', bookSST: false, type: 'binary', defaultCellStyle: defaultCellStyle }
+    return XLSX.write(wb, wopts)
+  }
+&nbsp;
+  generateXLSX () {
+    var wb = this.createWorkBook()
+    return new Blob([s2ab(this.writeXLSX (wb))], {type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'})
+  }
+&nbsp;
+<span class="fstat-no" title="function not covered" >  re</span>nderPreview () {
+<span class="cstat-no" title="statement not covered" >    return 'not implemented'</span>
+  }
+&nbsp;
+<span class="fstat-no" title="function not covered" >  re</span>nderJSON () {
+<span class="cstat-no" title="statement not covered" >    return 'not implemented'</span>
+  }
+&nbsp;
+  render () {
+    const { children, render, generateXLSX = false, onXLSXGenerated } = this.props
+&nbsp;
+    <span class="missing-if-branch" title="if path not taken" >I</span>if (generateXLSX &amp;&amp; <span class="branch-1 cbranch-no" title="branch not covered" >onXLSXGenerated)</span> <span class="cstat-no" title="statement not covered" >onXLSXGenerated(this.generateXLSX())</span>
+    <span class="missing-if-branch" title="if path not taken" >I</span>if (!render) <span class="cstat-no" title="statement not covered" >return null</span>
+    var triggerElement
+    const childrenWithProps = React.Children.map(this.props.children,
+      (child) =&gt; {
+        if (child.type === XTrigger &amp;&amp; child.props &amp;&amp; child.props.action) {
+          var triggerEvent = {}
+          triggerEvent[child.props.action] = <span class="fstat-no" title="function not covered" >()</span> =&gt; {
+<span class="cstat-no" title="statement not covered" >            onXLSXGenerated(this.generateXLSX())}</span>
+          return React.cloneElement(child.props.children, triggerEvent)
+        }else {
+          <span class="missing-if-branch" title="else path not taken" >E</span>if (render != 'only trigger') return child
+        }
+      }
+    )
+    return &lt;div&gt;{childrenWithProps}&lt;/div&gt;
+  }
+}
+&nbsp;
+WorkBook.propTypes = {
+  title: React.PropTypes.string,
+  author: React.PropTypes.string,
+  render: React.PropTypes.oneOfType([
+    React.PropTypes.string,
+    React.PropTypes.bool
+  ]),
+  children: (props, propName, componentName , ...rest) =&gt; {
+    var prop = props[propName]
+    if (deepFilterByComponentType(prop, XCell).length === 0) {
+      return new Error(
+        '`' + componentName + '` ' +
+        'should have at leact one descendant XCell component'
+      )
+    }
+  }
+}
+&nbsp;
+WorkBook.defaultProps = {
+  title: 'generated by react-xlsx',
+  author: 'react-xlsx',
+  render: true
+}
+&nbsp;
+export default WorkBook
+&nbsp;</pre></td></tr>
+</table></pre>
+<div class='push'></div><!-- for sticky footer -->
+</div><!-- /wrapper -->
+<div class='footer quiet pad2 space-top1 center small'>
+  Code coverage
+  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Thu Sep 08 2016 09:35:04 GMT+0100 (GMT Daylight Time)
+</div>
+</div>
+<script src="..\prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="..\sorter.js"></script>
+</body>
+</html>

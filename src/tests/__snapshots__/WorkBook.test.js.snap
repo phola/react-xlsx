@@ -1,0 +1,31 @@
+exports[`test simple renders 1`] = `
+<div>
+  <div>
+    <div>
+      <div>
+        nested
+      </div>
+    </div>
+  </div>
+  <div>
+    <span>
+      I am bold
+    </span>
+    <span>
+      plain string
+    </span>
+  </div>
+  <button
+    onClick={[Function anonymous]}>
+    get XLSX
+  </button>
+</div>
+`;
+
+exports[`test throws prop type error if has no cells 1`] = `
+<div>
+  <div>
+    ts
+  </div>
+</div>
+`;
