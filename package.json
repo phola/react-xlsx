@@ -1,6 +1,6 @@
 {
   "name": "react-xlsx",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "react-xlsx export components - Describe spreadsheets in JSX",
   "repository": {
     "type": "git",
@@ -48,7 +48,7 @@
     "sinon": "^1.17.3"
   },
   "peerDependencies": {
-    "react": "^0.14.7 || ^15.3.1"
+    "react": "^0.14.7 || ^15.0.0"
   },
   "dependencies": {
     "@kadira/react-storybook-addon-info": "^3.2.1",
