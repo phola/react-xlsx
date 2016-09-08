@@ -1,10 +1,10 @@
 {
   "name": "react-xlsx",
   "version": "0.0.1",
-  "description": "React Xlsx export components - Describe spreadsheets in JSX",
+  "description": "react-xlsx export components - Describe spreadsheets in JSX",
   "repository": {
     "type": "git",
-    "url": "https://github.com/you/repo.git"
+    "url": "https://github.com/phola/react-xlsx.git"
   },
   "license": "MIT",
   "scripts": {
@@ -45,6 +45,7 @@
     "react-addons-test-utils": "^15.3.1",
     "react-dom": "^15.3.1",
     "react-test-renderer": "^15.3.1",
+    "shx": "^0.1.4",
     "sinon": "^1.17.3"
   },
   "peerDependencies": {
