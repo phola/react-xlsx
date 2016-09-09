@@ -54,6 +54,7 @@ if (isInCreateReactAppSource) {
     appPackageJson: resolveApp('package.json'),
     appSrc: resolveApp('src'),
     appNodeModules: resolveApp('node_modules'),
-    ownNodeModules: resolveApp('node_modules')
+    ownNodeModules: resolveApp('node_modules'),
+    xlsx: resolveApp('node_modules/xlsx-style')
   };
 }

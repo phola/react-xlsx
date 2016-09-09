@@ -1,7 +1,7 @@
 var webpack = require('webpack');
 module.exports = function(storybookBaseConfig, configType) {
   //this config is to get working in browserland commonJS
-  console.log(storybookBaseConfig)
+  console.log(JSON.stringify(storybookBaseConfig))
    storybookBaseConfig.plugins.push(new webpack.IgnorePlugin(/cptable/))
   storybookBaseConfig.plugins.push(new webpack.IgnorePlugin(/\b(ods)\b/))
 
