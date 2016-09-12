@@ -12,6 +12,19 @@ class App extends Component {
       console.log(blob)
       FileSaver.saveAs(blob, 'test.xlsx')
     }
+    const pusher = (x) => {
+      let i = 0
+      let a = []
+      while (i < x) {
+        i++
+        a.push(i)
+      }
+      return a
+    }
+    const sheets = pusher(9)
+    let cols = pusher(10)
+    let rows = pusher(1000)
+
     return (
       <div className="App">
         <div className="App-header">
@@ -21,14 +34,23 @@ class App extends Component {
         <p className="App-intro">
           To get started, edit <code>src/App.js</code> and save to reload.
         </p>
-<WorkBook onXLSXGenerated={handleXLSX}>
-  <Cell cellRef='C9'>yay</Cell>
-    <XTrigger action='onClick'>
-      <button>
-        get XLSX
-      </button>
-    </XTrigger>
-</WorkBook>
+        <WorkBook  onXLSXGenerated={handleXLSX} render='trigger'>
+                  {sheets.map(sheet =>
+                    <Sheet key={sheet} name={'sheet ' + sheet}>
+                      {cols.map(col =>
+                        rows.map(row =>
+                          <Cell row={row} col={col}>
+                            {col + ', ' + row}
+                          </Cell>)
+                    )}
+                    </Sheet>)}
+
+                  <XTrigger action='onClick'>
+                    <button>
+                      get XLSX
+                    </button>
+                  </XTrigger>
+                </WorkBook>
       </div>
     );
   }

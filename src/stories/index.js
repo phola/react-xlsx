@@ -2,7 +2,7 @@ import React from 'react';
 import { storiesOf, action } from '@kadira/storybook';
 import { WorkBook, Sheet, Cell, XTrigger } from '../index'
 import FileSaver from 'file-saver'
-import { simple } from '../instances'
+import { simple, big } from '../instances'
 
 const defaultCellStyle = { font: { name: "Verdana", sz: 11, color: "FF00FF88"}, fill: {fgColor: {rgb: "FFFFAA00"}}}
 
@@ -13,6 +13,12 @@ storiesOf('WorkBook', module).addWithInfo(
       return simple()
     }
   ).addWithInfo(
+      'big usage (no render)',
+      'dfsdfdsf',
+      () => {
+        return big()
+      }
+    ).addWithInfo(
       'tiny',
       'dfsdfdsf',
       () => {

@@ -1,6 +1,6 @@
 import React from 'react';
 import { WorkBook } from '../index';
-import { simple } from '../instances'
+import { simple, big } from '../instances'
 import renderer from 'react-test-renderer';
 
 console.error = jest.genMockFn();
@@ -12,10 +12,6 @@ it('simple renders', () => {
   );
   let tree = component.toJSON();
   expect(tree).toMatchSnapshot();
-  //
-  // tree = tree.createWorkBook();
-  // expect(tree).toMatchSnapshot();
-
 });
 
 it('throws prop type error if has no cells', () => {
@@ -31,8 +27,13 @@ let tree = component.toJSON();
       expect(console.error.mock.calls.length).toBeGreaterThan(0);
       expect(console.error.mock.calls[0][0]).toContain('Cell');
 
-  //
-  // tree = tree.createWorkBook();
-  // expect(tree).toMatchSnapshot();
+});
 
+it('big renders', () => {
+  const jsx = big()
+  const component = renderer.create(
+    jsx
+  );
+  let tree = component.toJSON();
+  expect(tree).toMatchSnapshot();
 });

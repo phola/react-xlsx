@@ -39,3 +39,39 @@ export const simple = () => {
             </XTrigger>
           </WorkBook>)
 }
+
+const pusher = (x) => {
+  let i = 0
+  let a = []
+  while (i < x) {
+    i++
+    a.push(i)
+  }
+  return a
+}
+const sheets = pusher(9)
+let cols = pusher(10)
+let rows = pusher(1000)
+
+export const big = () => {
+
+  return (<WorkBook defaultCellStyle={defaultCellStyle} onXLSXGenerated={handleXLSX} render={false}>
+            {sheets.map(sheet =>
+              <Sheet key={sheet} name={'sheet ' + sheet}>
+                {cols.map(col =>
+                  rows.map(row =>
+                    <div
+                      row={row}
+                      col={col}>
+                      {col + ', ' + row}
+                    </div>)
+              )}
+              </Sheet>)}
+
+            <XTrigger action='onClick'>
+              <button>
+                get XLSX
+              </button>
+            </XTrigger>
+          </WorkBook>)
+}

@@ -40,7 +40,7 @@ export class WorkBook extends Component {
           mapped[cell_ref] = {
             t: type,
             s: cellStyle
-          // c: [{a: 'comment.author', t: 'comment.t', r: 'comment.r'}]
+            // c: [{a: 'comment.author', t: 'comment.t', r: 'comment.r'}]
           }
           // formulas not supported at the mo
           if (formula) {
@@ -92,7 +92,7 @@ export class WorkBook extends Component {
 
   generateXLSX () {
     var wb = this.createWorkBook()
-    return new Blob([s2ab(this.writeXLSX(wb))], {type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'})
+    return new Blob([s2ab(this.writeXLSX (wb))], {type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'})
   }
 
   renderPreview () {
@@ -121,9 +121,7 @@ export class WorkBook extends Component {
         }
       }
     )
-    return <div>
-             {childrenWithProps}
-           </div>
+    return <div>{childrenWithProps}</div>
   }
 }
 
