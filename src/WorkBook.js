@@ -1,8 +1,9 @@
 import React, { Component } from 'react'
 import XLSX from 'xlsx-style'
 import s2ab from './s2ab'
-import { deepFilterByComponentType, deepFilterByType } from './reactUtils'
+import { deepFilterByComponentType } from './reactUtils'
 import { Sheet, Cell, XTrigger } from './index'
+import traverse from 'react-traverse'
 
 export class WorkBook extends Component {
 
@@ -35,12 +36,13 @@ export class WorkBook extends Component {
           var merge = { s: { c: col, r: row }, e: { c: col + colSpan - 1, r: row + rowSpan - 1 } }
           merges.push(merge)
         }
-        var values = children ? deepFilterByType(children, 'string') : []
+        var values = []
+        traverse(children, { Text(path) { values.push(path.node) } })
         if (values.length > 0) {
           mapped[cell_ref] = {
             t: type,
             s: cellStyle
-            // c: [{a: 'comment.author', t: 'comment.t', r: 'comment.r'}]
+          // c: [{a: 'comment.author', t: 'comment.t', r: 'comment.r'}]
           }
           // formulas not supported at the mo
           if (formula) {
@@ -92,7 +94,7 @@ export class WorkBook extends Component {
 
   generateXLSX () {
     var wb = this.createWorkBook()
-    return new Blob([s2ab(this.writeXLSX (wb))], {type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'})
+    return new Blob([s2ab(this.writeXLSX(wb))], {type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'})
   }
 
   renderPreview () {
@@ -121,7 +123,9 @@ export class WorkBook extends Component {
         }
       }
     )
-    return <div>{childrenWithProps}</div>
+    return <div>
+             {childrenWithProps}
+           </div>
   }
 }
 
