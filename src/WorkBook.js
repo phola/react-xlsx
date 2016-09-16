@@ -1,11 +1,37 @@
 import React, { Component } from 'react'
 import XLSX from 'xlsx-style'
 import s2ab from './s2ab'
-import { deepFilterByComponentType } from './reactUtils'
-import { Sheet, Cell, XTrigger } from './index'
-import traverse from 'react-traverse'
+import { groupBy } from 'lodash'
+
+// note this component goes against typical react practice of one way top down data flow to allow
+// the user to arbitrarly place sheets and cell components anywhere in the component heirarchy.
+// the ancestor components broadcast values up to the WorkBook via context.
 
 export class WorkBook extends Component {
+
+  constructor (props) {
+    super(props)
+    this.state = { cells: [] }
+  }
+
+  getChildContext () {
+    return {
+      getCell: this.getCell.bind(this),
+      renderCells: this.props.renderCells,
+      toXLSX: this.toXLSX.bind(this)
+    }
+  }
+
+  getCell (val) {
+    var { cells } = this.state
+    var cell = cells.find(c => c.cellRef === val.cellRef)
+    if (cell) {
+      cell = val
+    }else {
+      cells.push(val)
+    }
+    this.setState({ cells: cells })
+  }
 
   updateRange (row, col, range) {
     if (range.s.r > row) { range.s.r = row }
@@ -21,69 +47,36 @@ export class WorkBook extends Component {
     if (cells.length > 0) {
       var range = {s: {c: 10000000, r: 10000000}, e: {c: 0, r: 0}}
       cells.forEach(cell => {
-        var { cellRef, col, row, colSpan, rowSpan, children, cellStyle = {}, type = 's', formula } = cell.props
-        var cell_ref
-        if (cellRef) {
-          var { r: row, c: col } = XLSX.utils.decode_cell(cellRef)
-          cell_ref = cellRef
-        } else {
-          cell_ref = XLSX.utils.encode_cell({c: col, r: row})
-        }
+        var { cellRef, col, row, data, merge } = cell
         range = this.updateRange(row, col, range)
-        if (colSpan || rowSpan) {
-          colSpan = colSpan ? colSpan : 1
-          rowSpan = rowSpan ? rowSpan : 1
-          var merge = { s: { c: col, r: row }, e: { c: col + colSpan - 1, r: row + rowSpan - 1 } }
+        if (merge) {
           merges.push(merge)
         }
-        var values = []
-        traverse(children, { Text(path) { values.push(path.node) } })
-        if (values.length > 0) {
-          mapped[cell_ref] = {
-            t: type,
-            s: cellStyle
-          // c: [{a: 'comment.author', t: 'comment.t', r: 'comment.r'}]
-          }
-          // formulas not supported at the mo
-          if (formula) {
-            mapped[cell_ref].f = values[0]
-          }else {
-            mapped[cell_ref].v = values[0]
-          }
-        }
+        mapped[cellRef] = data
       })
       mapped = Object.assign(mapped, {'!ref': XLSX.utils.encode_range(range)}, {'!merges': merges})
     }
     return mapped
   }
 
-  mapSheets (sheets) {
-    var mapped = { Sheets: {}, SheetNames: [] }
-    sheets.forEach(sheet => {
-      const { name, children } = sheet.props
-      var cells = deepFilterByComponentType(children, Cell)
-      mapped.Sheets[name] = this.mapCells(cells)
-      mapped.SheetNames.push(name)
-    })
-    return mapped
-  }
-
-  createWorkBook () {
+  toJSON (cb = this.props.toJSONCallback) {
     const { children, title, author } = this.props
-    var wb = {}
-    var sheets = deepFilterByComponentType(children, Sheet)
-    if (sheets.length > 0) {
-      wb = this.mapSheets(sheets)
-      wb.Props = { Title: title, Author: author }
-    }else {
-      var cells = deepFilterByComponentType(children, Cell)
-      if (cells.length > 0) {
-        wb.SheetNames = ['Sheet1']
-        wb.Sheets = {}
-        wb.Sheets['Sheet1'] = this.mapCells(cells)
+    var wb
+    var sheets = groupBy(this.state.cells, 'sheet')
+    if (sheets) {
+      wb = { Sheets: {}, SheetNames: [] }
+      Object.keys(sheets).forEach(sheet => {
+        wb.SheetNames.push(sheet)
+        wb.Sheets[sheet] = this.mapCells(sheets[sheet])
       }
+      )
     }
-    return wb
+    if (cb) {
+      cb(wb)
+    }
+    else {
+      return wb
+    }
   }
 
   writeXLSX (wb) {
@@ -92,63 +85,40 @@ export class WorkBook extends Component {
     return XLSX.write(wb, wopts)
   }
 
-  generateXLSX () {
-    var wb = this.createWorkBook()
-    return new Blob([s2ab(this.writeXLSX(wb))], {type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'})
-  }
-
-  renderPreview () {
-    return 'not implemented'
-  }
-
-  renderJSON () {
-    return 'not implemented'
+  toXLSX (wb = this.toJSON()) {
+    this.props.toXLSXCallback(new Blob([s2ab(this.writeXLSX(wb))], {type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'}))
   }
 
   render () {
-    const { children, render, generateXLSX = false, onXLSXGenerated } = this.props
+    const { children, generateXLSX = false, toXLSXCallback } = this.props
 
-    if (generateXLSX && onXLSXGenerated) onXLSXGenerated(this.generateXLSX())
-    if (!render) return null
-    var triggerElement
-    const childrenWithProps = React.Children.map(this.props.children,
-      (child) => {
-        if (child.type === XTrigger && child.props && child.props.action) {
-          var triggerEvent = {}
-          triggerEvent[child.props.action] = () => {
-            onXLSXGenerated(this.generateXLSX())}
-          return React.cloneElement(child.props.children, triggerEvent)
-        }else {
-          if (render != 'trigger') return child
-        }
-      }
-    )
-    return <div>
-             {childrenWithProps}
-           </div>
+    if (generateXLSX && toXLSXCallback) this.toXSLX()
+
+    return <div>{children}</div>
+
   }
 }
 
 WorkBook.propTypes = {
   title: React.PropTypes.string,
   author: React.PropTypes.string,
-  render: React.PropTypes.oneOfType([
-    React.PropTypes.string,
-    React.PropTypes.bool
-  ]),
-  children: (props, propName, componentName , ...rest) => {
-    var prop = props[propName]
-    if (deepFilterByComponentType(prop, Cell).length === 0) {
-      return new Error(
-        '`' + componentName + '` ' +
-        'should have at leact one descendant Cell component'
-      )
-    }
-  }
+  renderCells: React.PropTypes.bool,
+  toXLSXCallback: React.PropTypes.func,
+  toJSONCallback: React.PropTypes.func,
+  children: React.PropTypes.oneOfType([
+    React.PropTypes.object,
+    React.PropTypes.array
+  ])
 }
 
 WorkBook.defaultProps = {
   title: 'generated by react-xlsx',
   author: 'react-xlsx',
-  render: true
+  renderCells: true
+}
+
+WorkBook.childContextTypes = {
+  getCell: React.PropTypes.func,
+  toXLSX: React.PropTypes.func,
+  renderCells: React.PropTypes.bool
 }

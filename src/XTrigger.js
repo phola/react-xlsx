@@ -7,8 +7,14 @@ export class XTrigger extends Component {
   };
 
   render() {
-    const { children } = this.props
-    if (typeof children === 'string') return <span>{children}</span>
-    return children
+    const { children, action } = this.props
+    var triggerEvent = {}
+    triggerEvent[action] = () => this.context.toXLSX()
+    var cloned = React.cloneElement(children, triggerEvent)
+    return cloned
   }
 }
+
+XTrigger.contextTypes = {
+  toXLSX: React.PropTypes.func
+};

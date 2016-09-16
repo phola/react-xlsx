@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 
 export class Sheet extends Component {
-  static propTypes = {
-    name: React.PropTypes.string,
-    children: React.PropTypes.node
-  };
+
+  getChildContext() {
+    var { name = 'Sheet1'} = this.props
+    return { sheet: name };
+  }
 
   render() {
     const { children } = this.props
@@ -12,3 +13,16 @@ export class Sheet extends Component {
     return <div>{children}</div>
   }
 }
+
+Sheet.propTypes = {
+  name: React.PropTypes.string,
+  children: React.PropTypes.node
+};
+
+Sheet.contextTypes = {
+  getCell: React.PropTypes.func
+};
+
+Sheet.childContextTypes = {
+  sheet: React.PropTypes.string
+};

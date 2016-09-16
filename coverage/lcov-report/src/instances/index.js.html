@@ -20,9 +20,9 @@
     </h1>
     <div class='clearfix'>
       <div class='fl pad1y space-right2'>
-        <span class="strong">75% </span>
+        <span class="strong">86.96% </span>
         <span class="quiet">Statements</span>
-        <span class='fraction'>9/12</span>
+        <span class='fraction'>20/23</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">100% </span>
@@ -30,18 +30,18 @@
         <span class='fraction'>0/0</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">50% </span>
+        <span class="strong">75% </span>
         <span class="quiet">Functions</span>
-        <span class='fraction'>2/4</span>
+        <span class='fraction'>6/8</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">75% </span>
+        <span class="strong">86.96% </span>
         <span class="quiet">Lines</span>
-        <span class='fraction'>9/12</span>
+        <span class='fraction'>20/23</span>
       </div>
     </div>
   </div>
-  <div class='status-line medium'></div>
+  <div class='status-line high'></div>
 <pre><table class="coverage">
 <tr><td class="line-count quiet">1
 2
@@ -112,7 +112,29 @@
 67
 68
 69
-70</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -155,23 +177,43 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-yes">58x</span>
+<span class="cline-any cline-yes">58x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">9x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">90x</span>
+<span class="cline-any cline-yes">900x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -183,6 +225,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import React from 'react'
 import { WorkBook, Sheet, Cell, XTrigger } from '../index'
+import SubTest from './subtest'
 import FileSaver from 'file-saver'
 &nbsp;
 const defaultCellStyle = { font: { name: 'Verdana', sz: 11, color: 'FF00FF88' }, fill: { fgColor: { rgb: 'FFFFAA00' } } }
@@ -193,7 +236,7 @@ const handleXLSX = <span class="fstat-no" title="function not covered" >(b</span
 }
 &nbsp;
 export const simple = () =&gt; {
-  return (&lt;WorkBook defaultCellStyle={defaultCellStyle} onXLSXGenerated={handleXLSX} render='trigger'&gt;
+  return (&lt;WorkBook defaultCellStyle={defaultCellStyle} onXLSXGenerated={handleXLSX}&gt;
             &lt;Sheet name='woooo'&gt;
               &lt;Cell
                 row={0}
@@ -209,7 +252,7 @@ export const simple = () =&gt; {
             &lt;/Sheet&gt;
             &lt;Sheet name='hoooo'&gt;
               &lt;Cell row={1} col={2} cellStyle={{font: {bold: true}}}&gt;
-                I am bold
+                I am bored
               &lt;/Cell&gt;
               &lt;Cell cellRef='C9'&gt;
                 plain string
@@ -223,26 +266,46 @@ export const simple = () =&gt; {
           &lt;/WorkBook&gt;)
 }
 &nbsp;
+const pusher = (x) =&gt; {
+  let i = 0
+  let a = []
+  while (i &lt; x) {
+    i++
+    a.push(i)
+  }
+  return a
+}
+const sheets = pusher(9)
+let cols = pusher(10)
+let rows = pusher(10)
+&nbsp;
 export const big = () =&gt; {
-  const sheets = new Array(8)
-  const cols = new Array(1000)
-  const rows = new Array(1000)
-  return (&lt;WorkBook defaultCellStyle={defaultCellStyle} onXLSXGenerated={handleXLSX} render='trigger'&gt;
-            {sheets.map(<span class="fstat-no" title="function not covered" >(s</span>heet, i) =&gt;
-<span class="cstat-no" title="statement not covered" >              &lt;Sheet name={'sheet ' + sheet}&gt;</span>
-                &lt;Cell
-                  row={0}
-                  col={1}
-                  colSpan={2}
-                  rowSpan={6}&gt;
-                  &lt;div&gt;
-                    &lt;div&gt;
-                      nested
-                    &lt;/div&gt;
-                  &lt;/div&gt;
-                &lt;/Cell&gt;
+&nbsp;
+  return (&lt;WorkBook defaultCellStyle={defaultCellStyle} onXLSXGenerated={handleXLSX} render={false}&gt;
+            {sheets.map(sheet =&gt;
+              &lt;Sheet key={sheet} name={'sheet ' + sheet}&gt;
+                {cols.map(col =&gt;
+                  rows.map(row =&gt;
+                    &lt;div
+                      row={row}
+                      col={col}&gt;
+                      {col + ', ' + row}
+                    &lt;/div&gt;)
+              )}
               &lt;/Sheet&gt;)}
 &nbsp;
+            &lt;XTrigger action='onClick'&gt;
+              &lt;button&gt;
+                get XLSX
+              &lt;/button&gt;
+            &lt;/XTrigger&gt;
+          &lt;/WorkBook&gt;)
+}
+&nbsp;
+export const subtest = <span class="fstat-no" title="function not covered" >()</span> =&gt; {
+<span class="cstat-no" title="statement not covered" >  return (&lt;WorkBook defaultCellStyle={defaultCellStyle} onXLSXGenerated={handleXLSX} render&gt;</span>
+            &lt;SubTest cellRef='C9' content='feesh'/&gt;
+            &lt;SubTest cellRef='C10' content='feesh'/&gt;
             &lt;XTrigger action='onClick'&gt;
               &lt;button&gt;
                 get XLSX
@@ -256,7 +319,7 @@ export const big = () =&gt; {
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Mon Sep 12 2016 07:56:27 GMT+0100 (GMT Daylight Time)
+  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Fri Sep 16 2016 08:43:05 GMT+0100 (GMT Daylight Time)
 </div>
 </div>
 <script src="..\..\prettify.js"></script>

@@ -1,5 +1,6 @@
 import React from 'react'
 import { WorkBook, Sheet, Cell, XTrigger } from '../index'
+import SubTest from './subtest'
 import FileSaver from 'file-saver'
 
 const defaultCellStyle = { font: { name: 'Verdana', sz: 11, color: 'FF00FF88' }, fill: { fgColor: { rgb: 'FFFFAA00' } } }
@@ -10,7 +11,7 @@ const handleXLSX = (blob) => {
 }
 
 export const simple = () => {
-  return (<WorkBook defaultCellStyle={defaultCellStyle} onXLSXGenerated={handleXLSX} render='trigger'>
+  return (<WorkBook defaultCellStyle={defaultCellStyle} toXLSXCallback={handleXLSX}>
             <Sheet name='woooo'>
               <Cell
                 row={0}
@@ -26,7 +27,7 @@ export const simple = () => {
             </Sheet>
             <Sheet name='hoooo'>
               <Cell row={1} col={2} cellStyle={{font: {bold: true}}}>
-                I am bold
+                I am bored
               </Cell>
               <Cell cellRef='C9'>
                 plain string
@@ -51,11 +52,11 @@ const pusher = (x) => {
 }
 const sheets = pusher(9)
 let cols = pusher(10)
-let rows = pusher(1000)
+let rows = pusher(10)
 
 export const big = () => {
 
-  return (<WorkBook defaultCellStyle={defaultCellStyle} onXLSXGenerated={handleXLSX} render={false}>
+  return (<WorkBook defaultCellStyle={defaultCellStyle} toXLSXCallback={handleXLSX} render={false}>
             {sheets.map(sheet =>
               <Sheet key={sheet} name={'sheet ' + sheet}>
                 {cols.map(col =>
@@ -68,6 +69,18 @@ export const big = () => {
               )}
               </Sheet>)}
 
+            <XTrigger action='onClick'>
+              <button>
+                get XLSX
+              </button>
+            </XTrigger>
+          </WorkBook>)
+}
+
+export const subtest = () => {
+  return (<WorkBook defaultCellStyle={defaultCellStyle} toXLSXCallback={handleXLSX} render>
+            <SubTest cellRef='C9' content='feesh'/>
+            <SubTest cellRef='C10' content='feesh'/>
             <XTrigger action='onClick'>
               <button>
                 get XLSX

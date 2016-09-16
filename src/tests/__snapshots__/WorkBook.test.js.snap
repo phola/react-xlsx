@@ -1,5 +1,22 @@
+exports[`test big renders 1`] = `null`;
+
 exports[`test simple renders 1`] = `
 <div>
+  <div>
+    <div>
+      <div>
+        nested
+      </div>
+    </div>
+  </div>
+  <div>
+    <span>
+      I am bored
+    </span>
+    <span>
+      plain string
+    </span>
+  </div>
   <button
     onClick={[Function anonymous]}>
     get XLSX

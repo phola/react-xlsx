@@ -1,17 +1,75 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
+import shallowCompare from 'react-addons-shallow-compare'
+import XLSX from 'xlsx-style'
 
 export class Cell extends Component {
-  static propTypes = {
-    row: React.PropTypes.number,
-    col: React.PropTypes.number,
-    cellRef: React.PropTypes.string,
-    children: React.PropTypes.node,
-    cellStyle: React.PropTypes.object
-  };
+
+  componentDidMount() {
+    this.context.getCell(this.mapCell())
+  }
+
+  shouldComponentUpdate(nextProps, nextState) {
+    var updated = shallowCompare(this, nextProps, nextState)
+    if (updated) {
+      this.context.getCell(nextProps)
+      console.log(nextProps)
+    }
+    return updated
+  }
+
+  mapCell() {
+    var { cellRef, col, row, colSpan, rowSpan, children = '', cellStyle = {}, type = 's', formula } = this.props
+    var { sheet = 'Sheet1' } = this.context
+    var cell_ref, merge
+
+    if (cellRef) {
+      var { r: row, c: col } = XLSX.utils.decode_cell(cellRef)
+      cell_ref = cellRef
+    } else {
+      cell_ref = XLSX.utils.encode_cell({c: col, r: row})
+    }
+
+    if (colSpan || rowSpan) {
+      colSpan = colSpan ? colSpan : 1
+      rowSpan = rowSpan ? rowSpan : 1
+      merge = { s: { c: col, r: row }, e: { c: col + colSpan - 1, r: row + rowSpan - 1 } }
+    }
+
+    var mapped = {
+        t: type,
+        s: cellStyle
+        // c: [{a: 'comment.author', t: 'comment.t', r: 'comment.r'}]
+      }
+      // formulas not supported at the mo
+      if (formula) {
+        mapped.f = children
+      }else {
+        mapped.v = children
+      }
+
+      return { cellRef: cell_ref, data: mapped, merge: merge, col: col, row: row, sheet: sheet }
+  }
 
   render() {
-    const { children } = this.props
-    if (typeof children === 'string') return <span>{children}</span>
-    return children
+    if (this.context.renderCells) {
+      const { children } = this.props
+      if (typeof children === 'string') return <span>{children}</span>
+      return children
+    }
+    return null
   }
 }
+
+Cell.propTypes = {
+  row: React.PropTypes.number,
+  col: React.PropTypes.number,
+  cellRef: React.PropTypes.string,
+  children: React.PropTypes.string,
+  cellStyle: React.PropTypes.object
+};
+
+Cell.contextTypes = {
+  getCell: React.PropTypes.func,
+  sheet:  React.PropTypes.string,
+  renderCells: React.PropTypes.bool
+};

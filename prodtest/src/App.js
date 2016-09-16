@@ -3,6 +3,7 @@ import FileSaver from 'file-saver'
 import logo from './logo.svg';
 import './App.css';
 import { WorkBook, Sheet, Cell, XTrigger } from '../../dist/index'
+import { Title } from './title.js';
 
 class App extends Component {
 
@@ -23,7 +24,7 @@ class App extends Component {
     }
     const sheets = pusher(9)
     let cols = pusher(10)
-    let rows = pusher(1000)
+    let rows = pusher(10)
 
     return (
       <div className="App">
@@ -34,22 +35,23 @@ class App extends Component {
         <p className="App-intro">
           To get started, edit <code>src/App.js</code> and save to reload.
         </p>
-        <WorkBook  onXLSXGenerated={handleXLSX} render='trigger'>
+        <WorkBook  onXLSXGenerated={handleXLSX} render>
+          <XTrigger action='onClick'>
+            <button>
+              get XLSX
+            </button>
+          </XTrigger>
                   {sheets.map(sheet =>
                     <Sheet key={sheet} name={'sheet ' + sheet}>
                       {cols.map(col =>
                         rows.map(row =>
                           <Cell row={row} col={col}>
-                            {col + ', ' + row}
+                            <Title content={col + ', ' + row} />
                           </Cell>)
                     )}
                     </Sheet>)}
 
-                  <XTrigger action='onClick'>
-                    <button>
-                      get XLSX
-                    </button>
-                  </XTrigger>
+
                 </WorkBook>
       </div>
     );
