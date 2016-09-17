@@ -5,20 +5,19 @@ import XLSX from 'xlsx-style'
 export class Cell extends Component {
 
   componentDidMount() {
-    this.context.getCell(this.mapCell())
+    if (this.context.getCell) this.context.getCell(this.mapCell(this.props))
   }
 
   shouldComponentUpdate(nextProps, nextState) {
     var updated = shallowCompare(this, nextProps, nextState)
     if (updated) {
-      this.context.getCell(nextProps)
-      console.log(nextProps)
+      if (this.context.getCell) this.context.getCell(this.mapCell(nextProps))
     }
     return updated
   }
 
-  mapCell() {
-    var { cellRef, col, row, colSpan, rowSpan, children = '', cellStyle = {}, type = 's', formula } = this.props
+  mapCell(props) {
+    var { cellRef, col, row, colSpan, rowSpan, children = '', cellStyle = {}, type = 's', formula } = props
     var { sheet = 'Sheet1' } = this.context
     var cell_ref, merge
 
@@ -60,6 +59,7 @@ export class Cell extends Component {
   }
 }
 
+// todo add better prop validation
 Cell.propTypes = {
   row: React.PropTypes.number,
   col: React.PropTypes.number,

@@ -20,14 +20,14 @@
     </h1>
     <div class='clearfix'>
       <div class='fl pad1y space-right2'>
-        <span class="strong">95.65% </span>
+        <span class="strong">86.67% </span>
         <span class="quiet">Statements</span>
-        <span class='fraction'>22/23</span>
+        <span class='fraction'>26/30</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">72.22% </span>
+        <span class="strong">61.54% </span>
         <span class="quiet">Branches</span>
-        <span class='fraction'>13/18</span>
+        <span class='fraction'>16/26</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">100% </span>
@@ -35,9 +35,9 @@
         <span class='fraction'>4/4</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">95.45% </span>
+        <span class="strong">88.89% </span>
         <span class="quiet">Lines</span>
-        <span class='fraction'>21/22</span>
+        <span class='fraction'>24/27</span>
       </div>
     </div>
   </div>
@@ -109,18 +109,31 @@
 64
 65
 66
-67</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">6x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -157,9 +170,13 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">12x</span>
-<span class="cline-any cline-yes">12x</span>
-<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -172,25 +189,30 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import React, { Component } from 'react'
+import shallowCompare from 'react-addons-shallow-compare'
 import XLSX from 'xlsx-style'
 &nbsp;
 export class Cell extends Component {
 &nbsp;
   componentDidMount() {
-    debugger
-    this.context.getCell(this.mapCell())
+    <span class="missing-if-branch" title="else path not taken" >E</span>if (this.context.getCell) this.context.getCell(this.mapCell(this.props))
   }
 &nbsp;
-  componentWillReceiveProps (nextProps) {
-    // this.context.getCell(nextProps)
+  shouldComponentUpdate(nextProps, nextState) {
+    var updated = shallowCompare(this, nextProps, nextState)
+    <span class="missing-if-branch" title="if path not taken" >I</span>if (updated) {
+<span class="cstat-no" title="statement not covered" >      if (this.context.getCell) <span class="cstat-no" title="statement not covered" >this.context.getCell(this.mapCell(nextProps))</span></span>
+    }
+    return updated
   }
 &nbsp;
-  mapCell() {
-    var { cellRef, col, row, colSpan, rowSpan, children = <span class="branch-0 cbranch-no" title="branch not covered" >'',</span> cellStyle = {}, type = 's', formula } = this.props
+  mapCell(props) {
+    var { cellRef, col, row, colSpan, rowSpan, children = <span class="branch-0 cbranch-no" title="branch not covered" >'',</span> cellStyle = {}, type = 's', formula } = props
     var { sheet = <span class="branch-0 cbranch-no" title="branch not covered" >'Sheet1' </span>} = this.context
     var cell_ref, merge
 &nbsp;
@@ -223,12 +245,16 @@ export class Cell extends Component {
   }
 &nbsp;
   render() {
-    const { children } = this.props
-    if (typeof children === 'string') return &lt;span&gt;{children}&lt;/span&gt;
-    return children
+    <span class="missing-if-branch" title="else path not taken" >E</span>if (this.context.renderCells) {
+      const { children } = this.props
+      if (typeof children === 'string') return &lt;span&gt;{children}&lt;/span&gt;
+      return children
+    }
+<span class="cstat-no" title="statement not covered" >    return null</span>
   }
 }
 &nbsp;
+// todo add better prop validation
 Cell.propTypes = {
   row: React.PropTypes.number,
   col: React.PropTypes.number,
@@ -239,7 +265,8 @@ Cell.propTypes = {
 &nbsp;
 Cell.contextTypes = {
   getCell: React.PropTypes.func,
-  sheet:  React.PropTypes.string
+  sheet:  React.PropTypes.string,
+  renderCells: React.PropTypes.bool
 };
 &nbsp;</pre></td></tr>
 </table></pre>
@@ -247,7 +274,7 @@ Cell.contextTypes = {
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Fri Sep 16 2016 08:43:05 GMT+0100 (GMT Daylight Time)
+  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Sat Sep 17 2016 11:09:47 GMT+0100 (GMT Daylight Time)
 </div>
 </div>
 <script src="..\prettify.js"></script>

@@ -59,7 +59,7 @@ export class WorkBook extends Component {
     return mapped
   }
 
-  toJSON (cb = this.props.toJSONCallback) {
+  toJSON (cb) {
     const { children, title, author } = this.props
     var wb
     var sheets = groupBy(this.state.cells, 'sheet')
@@ -86,7 +86,13 @@ export class WorkBook extends Component {
   }
 
   toXLSX (wb = this.toJSON()) {
-    this.props.toXLSXCallback(new Blob([s2ab(this.writeXLSX(wb))], {type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'}))
+    var blob = new Blob([s2ab(this.writeXLSX(wb))], {type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'})
+    if (this.props.toXLSXCallback) {
+      this.props.toXLSXCallback(blob)
+    }
+    else {
+      return blob
+    }
   }
 
   render () {
