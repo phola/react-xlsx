@@ -50,7 +50,7 @@ export class Cell extends Component {
   }
 
   render () {
-    if (this.context.renderCells) {
+    if (!this.context && this.context.noRender) {
       const { children } = this.props
       if (typeof children === 'string') return <span>{children}</span>
       return children
@@ -71,5 +71,5 @@ Cell.propTypes = {
 Cell.contextTypes = {
   getCell: React.PropTypes.func,
   sheet: React.PropTypes.string,
-  renderCells: React.PropTypes.bool
+  noRender: React.PropTypes.bool
 }

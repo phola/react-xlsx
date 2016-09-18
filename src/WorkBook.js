@@ -17,7 +17,7 @@ export class WorkBook extends Component {
   getChildContext () {
     return {
       getCell: this.getCell.bind(this),
-      renderCells: this.props.renderCells,
+      noRender: this.props.noRender,
       toXLSX: this.toXLSX.bind(this)
     }
   }
@@ -108,7 +108,7 @@ export class WorkBook extends Component {
 WorkBook.propTypes = {
   title: React.PropTypes.string,
   author: React.PropTypes.string,
-  renderCells: React.PropTypes.bool,
+  noRender: React.PropTypes.bool,
   toXLSXCallback: React.PropTypes.func,
   toJSONCallback: React.PropTypes.func,
   children: React.PropTypes.oneOfType([
@@ -126,5 +126,5 @@ WorkBook.defaultProps = {
 WorkBook.childContextTypes = {
   getCell: React.PropTypes.func,
   toXLSX: React.PropTypes.func,
-  renderCells: React.PropTypes.bool
+  noRender: React.PropTypes.bool
 }
