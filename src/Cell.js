@@ -50,7 +50,7 @@ export class Cell extends Component {
   }
 
   render () {
-    if (!this.context && this.context.noRender) {
+    if (!this.context || !this.context.noRender) {
       const { children } = this.props
       if (typeof children === 'string') return <span>{children}</span>
       return children

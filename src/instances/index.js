@@ -87,16 +87,16 @@ let rows = pusher(10)
 
 export const big = () => {
 
-  return (<WorkBook defaultCellStyle={defaultCellStyle} toXLSXCallback={handleXLSX} render={false}>
+  return (<WorkBook defaultCellStyle={defaultCellStyle} toXLSXCallback={handleXLSX}>
             {sheets.map(sheet =>
               <Sheet key={sheet} name={'sheet ' + sheet}>
                 {cols.map(col =>
                   rows.map(row =>
-                    <div
+                    <Cell
                       row={row}
                       col={col}>
                       {col + ', ' + row}
-                    </div>)
+                    </Cell>)
               )}
               </Sheet>)}
 
