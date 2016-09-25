@@ -17,7 +17,7 @@ export class Cell extends Component {
   }
 
   mapCell (props) {
-    var { cellRef, col, row, colSpan, rowSpan, children = '', cellStyle = {}, type = 's', formula } = props
+    var { cellRef, col, row, colSpan, rowSpan, children = '', cellStyle = {}, type = 's', formula, width} = props
     var { sheet = 'Sheet1' } = this.context
     var cell_ref, merge
 
@@ -46,14 +46,13 @@ export class Cell extends Component {
       mapped.v = children
     }
 
-    return { cellRef: cell_ref, data: mapped, merge: merge, col: col, row: row, sheet: sheet }
+    return { cellRef: cell_ref, data: mapped, merge: merge, col: col, row: row, sheet: sheet, width: width }
   }
 
   render () {
     if (!this.context || !this.context.noRender) {
       const { children } = this.props
-      if (typeof children === 'string') return <span>{children}</span>
-      return children
+      return <div style={this.props.style}>{children}</div>
     }
     return null
   }
@@ -65,7 +64,9 @@ Cell.propTypes = {
   col: React.PropTypes.number,
   cellRef: React.PropTypes.string,
   children: React.PropTypes.string,
-  cellStyle: React.PropTypes.object
+  cellStyle: React.PropTypes.object,
+  width: React.PropTypes.number,
+  style: React.PropTypes.object
 }
 
 Cell.contextTypes = {

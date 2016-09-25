@@ -19,10 +19,6 @@ Sheet.propTypes = {
   children: React.PropTypes.node
 };
 
-Sheet.contextTypes = {
-  getCell: React.PropTypes.func
-};
-
 Sheet.childContextTypes = {
   sheet: React.PropTypes.string
 };

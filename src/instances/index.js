@@ -16,17 +16,21 @@ export const simple = () => {
               <Cell
                 row={0}
                 col={1}
-                colSpan={2}
-                rowSpan={6}>
-                <div>
-                  <div>
+                width={600}
+              >
                     nested
-                  </div>
-                </div>
-              </Cell>
+                </Cell>
+              <Cell
+                cellRef='D1'
+                width={300}>asasasas</Cell>
+                <Cell
+                  cellRef='F9'
+                  colSpan={2}
+                  rowSpan={6}
+                  width={600}>merged</Cell>
             </Sheet>
             <Sheet name='hoooo'>
-              <Cell row={1} col={2} cellStyle={{font: {bold: true}}}>
+              <Cell row={1} col={2} cellStyle={{font: {bold: true}}} width={200}>
                 I am bored
               </Cell>
               <Cell cellRef='C9'>
@@ -57,12 +61,14 @@ export const simpleNoCallback = () => {
               </Cell>
             </Sheet>
             <Sheet name='hoooo'>
+              <div>
               <Cell row={1} col={2} cellStyle={{font: {bold: true}}}>
                 I am bored
               </Cell>
               <Cell cellRef='C9'>
                 plain string
               </Cell>
+            </div>
             </Sheet>
             <XTrigger action='onClick'>
               <button>
