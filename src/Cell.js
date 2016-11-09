@@ -4,20 +4,35 @@ import XLSX from 'xlsx-style'
 
 export class Cell extends Component {
 
-  componentDidMount () {
-    if (this.context && this.context.getCell) this.context.getCell(this.mapCell(this.props))
-  }
 
-  shouldComponentUpdate (nextProps, nextState) {
-    var updated = shallowCompare(this, nextProps, nextState)
-    if (updated) {
-      if (this.context && this.context.getCell) this.context.getCell(this.mapCell(nextProps))
+  componentWillMount () {      
+   // debugger
+    if (this.context && this.context.getCell) {   
+    this.context.getCell(this.mapCell())
     }
-    return updated
+   //  debugger
+    // if (this.context && this.context.getCell) this.context.getCell(this.mapCell(this.props))
+   // debugger
+  // this._reactInternalInstance.mountComponent = function() {return '';}
   }
 
-  mapCell (props) {
-    var { cellRef, col, row, colSpan, rowSpan, children = '', cellStyle = {}, type = 's', formula, width} = props
+  componentDidMount () {
+   // debugger
+    // if (this.context && this.context.getCell) this.context.getCell(this.mapCell(this.props))
+   // debugger
+  // this._reactInternalInstance.mountComponent = function() {return '';}
+  }
+
+  // shouldComponentUpdate (nextProps, nextState) {
+  //   var updated = shallowCompare(this, nextProps, nextState)
+  //   if (updated) {
+  //     if (this.context && this.context.getCell) this.context.getCell(this.mapCell(nextProps))
+  //   }
+  //   return updated
+  // }
+
+  mapCell () {
+    var { cellRef, col, row, colSpan, rowSpan, children = '', cellStyle = {}, type = 's', formula, width} = this.props
     var { sheet = 'Sheet1' } = this.context
     var cell_ref, merge
 
@@ -50,11 +65,8 @@ export class Cell extends Component {
   }
 
   render () {
-    if (!this.context || !this.context.noRender) {
-      const { children } = this.props
-      return <div style={this.props.style}>{children}</div>
-    }
-    return null
+      const { children, style } = this.props
+      return <div style={style}>{children}</div>
   }
 }
 

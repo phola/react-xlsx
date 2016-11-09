@@ -1,4 +1,5 @@
 export { WorkBook } from './WorkBook'
+export { WorkBookHOC } from './WorkBookHOC'
 export { Sheet } from './Sheet'
 export { Cell } from './Cell'
 export { XTrigger } from './XTrigger'

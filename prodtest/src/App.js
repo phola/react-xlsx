@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import FileSaver from 'file-saver'
 import logo from './logo.svg';
 import './App.css';
-import { WorkBook, Sheet, Cell, XTrigger } from '../../dist/index'
+import { WorkBookHOC, Sheet, Cell, XTrigger } from '../../src/index'
+import HocTest  from '../../src/instances/hoctest'
 import { Title } from './title.js';
 
 class App extends Component {
@@ -35,24 +36,7 @@ class App extends Component {
         <p className="App-intro">
           To get started, edit <code>src/App.js</code> and save to reload.
         </p>
-        <WorkBook  onXLSXGenerated={handleXLSX} render>
-          <XTrigger action='onClick'>
-            <button>
-              get XLSX
-            </button>
-          </XTrigger>
-                  {sheets.map(sheet =>
-                    <Sheet key={sheet} name={'sheet ' + sheet}>
-                      {cols.map(col =>
-                        rows.map(row =>
-                          <Cell row={row} col={col}>
-                            <Title content={col + ', ' + row} />
-                          </Cell>)
-                    )}
-                    </Sheet>)}
-
-
-                </WorkBook>
+        <HocTest/>
       </div>
     );
   }

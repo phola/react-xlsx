@@ -1,9 +1,23 @@
 import React from 'react';
 
+export const recursiveCloneChildrenAddPropstoType = (children, type, addProp) => {
+        return React.Children.map(children, child => {
+            var childProps = {}
+            if (React.isValidElement(child) && child.props && (child.type.name === type)) {
+                childProps = Object.assign({}, child.props, addProp)
+            }
+            if (child.props) {
+                childProps.children = recursiveCloneChildrenAddPropstoType(child.props.children, type, addProp)
+                return React.cloneElement(child, childProps)
+            }
+            return child
+        })
+}
+
 export const deepFilterByComponentType = (children, type, results = []) => {
   React.Children.forEach(children, child => {
-    if (child) {
-      if (child.type === type) {
+    if (child && child.type) {
+      if (child.type.name === type) {
         results.push(child)
       }
       if (child.props && child.props.children) {

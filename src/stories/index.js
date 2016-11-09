@@ -2,7 +2,7 @@ import React from 'react';
 import { storiesOf, action } from '@kadira/storybook';
 import { WorkBook, Sheet, Cell, XTrigger } from '../index'
 import FileSaver from 'file-saver'
-import { simple, big, subtest } from '../instances'
+import { simple, big, subtest, subtestHOC } from '../instances'
 
 const defaultCellStyle = { font: { name: "Verdana", sz: 11, color: "FF00FF88"}, fill: {fgColor: {rgb: "FFFFAA00"}}}
 
@@ -22,6 +22,11 @@ storiesOf('WorkBook', module).addWithInfo(
         'wrapped cell',
         () => {
           return subtest()
+        }
+      ).add(
+        'wrapped cell hoc',
+        () => {
+          return subtestHOC()
         }
       ).addWithInfo(
       'tiny',

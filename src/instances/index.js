@@ -1,6 +1,7 @@
 import React from 'react'
-import { WorkBook, Sheet, Cell, XTrigger } from '../index'
+import { WorkBookHOC, WorkBook, Sheet, Cell, XTrigger } from '../index'
 import SubTest from './subtest'
+import HocTest from './hoctest'
 import FileSaver from 'file-saver'
 
 const defaultCellStyle = { font: { name: 'Verdana', sz: 11, color: 'FF00FF88' }, fill: { fgColor: { rgb: 'FFFFAA00' } } }
@@ -93,7 +94,7 @@ let rows = pusher(10)
 
 export const big = () => {
 
-  return (<WorkBook defaultCellStyle={defaultCellStyle} toXLSXCallback={handleXLSX}>
+  return (<WorkBook defaultCellStyle={defaultCellStyle} toXLSXCallback={handleXLSX} noRender>
             {sheets.map(sheet =>
               <Sheet key={sheet} name={'sheet ' + sheet}>
                 {cols.map(col =>
@@ -116,12 +117,18 @@ export const big = () => {
 
 export const subtest = () => {
   return (<WorkBook defaultCellStyle={defaultCellStyle} toXLSXCallback={handleXLSX} render>
+  <Sheet name='hoooo'>
             <SubTest cellRef='C9' content='feesh'/>
             <SubTest cellRef='C10' content='feesh'/>
+            </Sheet>
             <XTrigger action='onClick'>
               <button>
                 get XLSX
               </button>
             </XTrigger>
           </WorkBook>)
+}
+
+export const subtestHOC = () => {
+   return (<HocTest />)
 }
