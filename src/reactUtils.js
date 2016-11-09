@@ -3,10 +3,10 @@ import React from 'react';
 export const recursiveCloneChildrenAddPropstoType = (children, type, addProp) => {
         return React.Children.map(children, child => {
             var childProps = {}
-            if (React.isValidElement(child) && child.props && (child.type.name === type)) {
+            if (React.isValidElement(child) && child.props && child.type && (child.type.name === type)) {
                 childProps = Object.assign({}, child.props, addProp)
             }
-            if (child.props) {
+            if (child && child.props) {
                 childProps.children = recursiveCloneChildrenAddPropstoType(child.props.children, type, addProp)
                 return React.cloneElement(child, childProps)
             }

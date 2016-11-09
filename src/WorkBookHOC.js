@@ -10,6 +10,7 @@ export function WorkBookHOC (WrappedComponent, options = {render: true, debug: t
     constructor (props) {
       super(props)
       this.state = { cells: [] }
+      this.cells = []
     }
 
 // only update if children have changed?
@@ -17,20 +18,19 @@ export function WorkBookHOC (WrappedComponent, options = {render: true, debug: t
       return (this.props.children != nextProps.children)
     }
 
+    
+
     getCell (val) {
-      var { cells } = this.state
-      var cell = cells.find(c => (c.cellRef === val.cellRef && c.sheet === val.sheet))
+      var cell = this.cells.find(c => (c.cellRef === val.cellRef && c.sheet === val.sheet))
       if (cell) {
         cell = val
       } else {
-        cells.push(val)
-        this.setState({ cells: cells })
+        this.cells.push(val)
       }
     }
 
     componentDidMount () {
-      debugger
-      if (options.generate) {
+      if (options.generate && this.cells && this.cells.length > 0) {
         this.toXLSX()
       }
     }
@@ -55,7 +55,7 @@ export function WorkBookHOC (WrappedComponent, options = {render: true, debug: t
       if (options.render) return <span>{elementsTreeMod}</span>
 
       ReactDOMServer.renderToStaticMarkup(<div>{elementsTreeMod}</div>)
-
+      console.log('xl')
       if (options.debug) {
         return (
         <div>
@@ -98,7 +98,7 @@ export function WorkBookHOC (WrappedComponent, options = {render: true, debug: t
     getWB () {
       const { title, author, useFirstRowWidths } = this.props
       var wb
-      var sheets = groupBy(this.state.cells, 'sheet')
+      var sheets = groupBy(this.cells, 'sheet')
       if (sheets) {
         wb = { Sheets: {}, SheetNames: [] }
         Object.keys(sheets).forEach(sheet => {
