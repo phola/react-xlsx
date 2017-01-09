@@ -15,10 +15,8 @@ export function WorkBookHOC (WrappedComponent, options = {render: true, debug: t
 
 // only update if children have changed?
     shouldComponentUpdate (nextProps, nextState) {
-      return (this.props.children != nextProps.children)
+      return (this.props.children !== nextProps.children)
     }
-
-    
 
     getCell (val) {
       var cell = this.cells.find(c => (c.cellRef === val.cellRef && c.sheet === val.sheet))

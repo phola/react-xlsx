@@ -2,38 +2,10 @@ import React, { Component } from 'react'
 import shallowCompare from 'react-addons-shallow-compare'
 import XLSX from 'xlsx-style'
 
-export class Cell extends Component {
 
-
-  componentWillMount () {      
-   // debugger
-    if (this.context && this.context.getCell) {   
-    this.context.getCell(this.mapCell())
-    }
-   //  debugger
-    // if (this.context && this.context.getCell) this.context.getCell(this.mapCell(this.props))
-   // debugger
-  // this._reactInternalInstance.mountComponent = function() {return '';}
-  }
-
-  componentDidMount () {
-   // debugger
-    // if (this.context && this.context.getCell) this.context.getCell(this.mapCell(this.props))
-   // debugger
-  // this._reactInternalInstance.mountComponent = function() {return '';}
-  }
-
-  // shouldComponentUpdate (nextProps, nextState) {
-  //   var updated = shallowCompare(this, nextProps, nextState)
-  //   if (updated) {
-  //     if (this.context && this.context.getCell) this.context.getCell(this.mapCell(nextProps))
-  //   }
-  //   return updated
-  // }
-
-  mapCell () {
-    var { cellRef, col, row, colSpan, rowSpan, children = '', cellStyle = {}, type = 's', formula, width} = this.props
-    var { sheet = 'Sheet1' } = this.context
+export const mapCell = (props, sheet) => {
+    var { cellRef, col, row, colSpan, rowSpan, children = '', cellStyle = {}, type = 's', formula, width} = props
+   
     var cell_ref, merge
 
     if (cellRef) {
@@ -63,6 +35,38 @@ export class Cell extends Component {
 
     return { cellRef: cell_ref, data: mapped, merge: merge, col: col, row: row, sheet: sheet, width: width }
   }
+
+export class Cell extends Component {
+
+
+  componentWillMount () {      
+   // debugger
+    if (this.context && this.context.getCell) {  
+       var { sheet = 'Sheet1' } = this.context 
+    this.context.getCell(mapCell(this.props, sheet))
+    }
+   //  debugger
+    // if (this.context && this.context.getCell) this.context.getCell(this.mapCell(this.props))
+   // debugger
+  // this._reactInternalInstance.mountComponent = function() {return '';}
+  }
+
+  componentDidMount () {
+   // debugger
+    // if (this.context && this.context.getCell) this.context.getCell(this.mapCell(this.props))
+   // debugger
+  // this._reactInternalInstance.mountComponent = function() {return '';}
+  }
+
+  // shouldComponentUpdate (nextProps, nextState) {
+  //   var updated = shallowCompare(this, nextProps, nextState)
+  //   if (updated) {
+  //     if (this.context && this.context.getCell) this.context.getCell(this.mapCell(nextProps))
+  //   }
+  //   return updated
+  // }
+
+
 
   render () {
       const { children, style } = this.props

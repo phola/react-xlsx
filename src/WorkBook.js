@@ -14,28 +14,26 @@ export class WorkBook extends Component {
 
   constructor (props) {
     super(props)
-    this.test = this.test.bind(this);
-    this.toXLSX2 = this.toXLSX2.bind(this);
     this.state = { cells: [] }
   }
 
   getChildContext () {
     return {
       getCell: this.getCell.bind(this),
-        getSheet: this.getSheet.bind(this),
+      getSheet: this.getSheet.bind(this),
       noRender: this.props.noRender,
       toXLSX: this.toXLSX.bind(this)
     }
   }
 
-//only update if children have changed?
+// only update if children have changed?
   shouldComponentUpdate (nextProps, nextState) {
     return (this.props.children != nextProps.children)
   }
 
-  getSheet(val) {
-        debugger
-    }
+  getSheet (val) {
+    debugger
+  }
 
   getCell (val) {
     var { cells } = this.state
@@ -43,7 +41,7 @@ export class WorkBook extends Component {
 
     if (cell) {
       cell = val
-    }else {
+    } else {
       cells.push(val)
       this.setState({ cells: cells })
     }
@@ -76,7 +74,7 @@ export class WorkBook extends Component {
   }
 
   getWB () {
-    const { children, title, author, useFirstRowWidths } = this.props
+    const { children, title, author, autoColWidth, defaultCellWidth = 50 } = this.props
     var wb
     var sheets = groupBy(this.state.cells, 'sheet')
     if (sheets) {
@@ -84,15 +82,14 @@ export class WorkBook extends Component {
       Object.keys(sheets).forEach(sheet => {
         wb.SheetNames.push(sheet)
         wb.Sheets[sheet] = this.mapCells(sheets[sheet])
-        if (useFirstRowWidths) {
-          const fcols = sheets[sheet].filter(cell => cell.row === 0)
-          const cols = new Array(fcols.length)
-          const filtered = fcols.filter(cell => cell.width)
-          filtered.forEach(fc => {
-            cols[fc.col] = {wch:Math.round(fc.width/23)}
+        if (autoColWidth) {
+          // const fcols = sheets[sheet].filter(cell => cell.row === 0)
+          const cols = Object.values(groupBy(sheets[sheet], 'col'))
+          wb.Sheets[sheet]['!cols'] = cols.map(col => {
+            const width = Math.max.apply(this, col.map(cell => cell.width ? cell.width : defaultCellWidth))
+            return {wch: Math.round(width / 20)} // this is guess!
           })
-        wb.Sheets[sheet]['!cols'] = cols
-      }
+        }
       }
       )
     }
@@ -105,7 +102,7 @@ export class WorkBook extends Component {
     return XLSX.write(wb, wopts)
   }
 
-  toXLSX (wb = this.getWB()) {    
+  toXLSX (wb = this.getWB()) {
     var blob = new Blob([s2ab(this.writeXLSX(wb))], {type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'})
     if (this.props.toXLSXCallback) {
       this.props.toXLSXCallback(blob)
@@ -124,78 +121,29 @@ export class WorkBook extends Component {
     }
   }
 
-  test () {
-    const { children, title, author, useFirstRowWidths } = this.props
-    debugger
-    const XChildren = this.recursiveCloneChildren(children)
-    const sheets = deepFilterByComponentType(XChildren, 'Sheet').map(sheet => {
-      if (!sheet.props) return null
-      return {name: sheet.props.name, cells: sheet.props.children ? deepFilterByComponentType(sheet.props.children, 'Cell').map(cell => this.mapCell(cell.props)) : []}
-    })
-
-    var wb
-    if (sheets) {
-      wb = { Sheets: {}, SheetNames: [] }
-      sheets.forEach(sheet => {
-        wb.SheetNames.push(sheet.name)
-        wb.Sheets[sheet.name] = this.mapCells(sheet.cells)
-        if (useFirstRowWidths) {
-          const fcols = sheet.cells.filter(cell => cell.row === 0)
-          const cols = new Array(fcols.length)
-          const filtered = fcols.filter(cell => cell.width)
-          filtered.forEach(fc => {
-            cols[fc.col] = {wch:Math.round(fc.width/23)}
-          })
-        wb.Sheets[sheet.name]['!cols'] = cols
-      }
-      }
-      )
-    }
-
-    // debugger
-    return wb
-  }
-
-  toXLSX2 (wb = this.test()) { 
-    // debugger   
-    var blob = new Blob([s2ab(this.writeXLSX(wb))], {type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'})
-    if (this.props.toXLSXCallback) {
-      this.props.toXLSXCallback(blob)
-    }
-    else {
-      return blob
-    }
-  }
-
   render () {
     let { children, generateXLSX = false, toXLSXCallback, noRender } = this.props
     if (generateXLSX && toXLSXCallback) this.toXSLX()
-    // const elementsTreeMod = recursiveCloneChildrenAddPropstoType(this, 'Sheet', {getCell: this.getCell.bind(this)})
-    // const s = ReactDOMServer.renderToStaticMarkup(<div>{elementsTreeMod}</div>)
-    debugger
-    // const chil = this.recursiveCloneChildren(children)
-    // debugger
-    noRender = true
     return <div>
-        <button onClick={() => this.toXLSX2()}>download</button>
-        {!noRender && <div>{children}</div>}
+      <button onClick={() => this.toXLSX2()}>download</button>
+      {!noRender && <div>{children}</div>}
     </div>
   }
 
-  recursiveCloneChildren (children) {
-    return React.Children.map(children, child => {
-      if (!isObject(child)) return child
-      var childProps = { children: this.recursiveCloneChildren(child.props.children) }
-      return React.cloneElement(child, childProps)
-    })
-  }
+  // recursiveCloneChildren (children) {
+  //   return React.Children.map(children, child => {
+  //     if (!isObject(child)) return child
+  //     var childProps = { children: this.recursiveCloneChildren(child.props.children) }
+  //     return React.cloneElement(child, childProps)
+  //   })
+  // }
 }
 
 WorkBook.propTypes = {
   title: React.PropTypes.string,
   author: React.PropTypes.string,
   noRender: React.PropTypes.bool,
-  useFirstRowWidths: React.PropTypes.bool,
+  autoColWidth: React.PropTypes.bool,
   toXLSXCallback: React.PropTypes.func,
   toJSONCallback: React.PropTypes.func,
   children: React.PropTypes.oneOfType([
@@ -207,7 +155,7 @@ WorkBook.propTypes = {
 WorkBook.defaultProps = {
   title: 'generated by react-xlsx',
   author: 'react-xlsx',
-  useFirstRowWidths: true
+  autoColWidth: true
 }
 
 WorkBook.childContextTypes = {
