@@ -1,5 +1,7 @@
 # react-xlsx
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/phola/react-xlsx.svg)](https://greenkeeper.io/)
+
 WARNING - it's big and and not stable yet - more to come soon!
 
 Inspired by (but infinitely more boring than) react-music
