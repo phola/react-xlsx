@@ -1,10 +1,8 @@
 import React, { Component } from 'react'
 import XLSX from 'xlsx-style'
 import s2ab from './s2ab'
-import { recursiveCloneChildrenAddPropstoType } from './reactUtils'
-import { groupBy, isObject } from 'lodash'
+import { groupBy } from 'lodash'
 
-import ReactDOMServer from 'react-dom/server'
 
 // note this component goes against typical react practice of one way top down data flow to allow
 // the user to arbitrarly place sheets and cell components anywhere in the component heirarchy.
@@ -87,7 +85,7 @@ export class WorkBook extends Component {
           const cols = Object.values(groupBy(sheets[sheet], 'col'))
           wb.Sheets[sheet]['!cols'] = cols.map(col => {
             const width = Math.max.apply(this, col.map(cell => cell.width ? cell.width : defaultCellWidth))
-            return {wch: Math.round(width / 20)} // this is guess!
+            return {wch: Math.round(width / 20)} // this is a guess!
           })
         }
       }

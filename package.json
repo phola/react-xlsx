@@ -1,6 +1,6 @@
 {
   "name": "react-xlsx",
-  "version": "0.4.6",
+  "version": "0.4.7",
   "description": "react-xlsx export components - Describe spreadsheets in JSX",
   "repository": {
     "type": "git",
@@ -64,7 +64,8 @@
   "dependencies": {
     "jszip": "2.4.0",
     "lodash": "^4.15.0",
-    "react-addons-shallow-compare": "^15.3.1"
+    "react-addons-shallow-compare": "^15.3.1",
+    "react-dropzone": "^3.13.4"
   },
   "main": "dist/index.js",
   "engines": {

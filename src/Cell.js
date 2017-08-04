@@ -2,60 +2,79 @@ import React, { Component } from 'react'
 import shallowCompare from 'react-addons-shallow-compare'
 import XLSX from 'xlsx-style'
 
-
 export const mapCell = (props, sheet) => {
-    var { cellRef, col, row, colSpan, rowSpan, children = '', cellStyle = {}, type = 's', formula, width} = props
-   
-    var cell_ref, merge
+  var {
+    cellRef,
+    col,
+    row,
+    colSpan,
+    rowSpan,
+    children = '',
+    cellStyle = {},
+    type = 's',
+    formula,
+    width
+  } = props
 
-    if (cellRef) {
-      var { r: row, c: col } = XLSX.utils.decode_cell(cellRef)
-      cell_ref = cellRef
-    } else {
-      cell_ref = XLSX.utils.encode_cell({c: col, r: row})
-    }
+  var cell_ref, merge
 
-    if (colSpan || rowSpan) {
-      colSpan = colSpan ? colSpan : 1
-      rowSpan = rowSpan ? rowSpan : 1
-      merge = { s: { c: col, r: row }, e: { c: col + colSpan - 1, r: row + rowSpan - 1 } }
-    }
-
-    var mapped = {
-      t: type,
-      s: cellStyle
-    // c: [{a: 'comment.author', t: 'comment.t', r: 'comment.r'}]
-    }
-    // formulas not supported at the mo
-    if (formula) {
-      mapped.f = children
-    }else {
-      mapped.v = children
-    }
-
-    return { cellRef: cell_ref, data: mapped, merge: merge, col: col, row: row, sheet: sheet, width: width }
+  if (cellRef) {
+    var { r: row, c: col } = XLSX.utils.decode_cell(cellRef)
+    cell_ref = cellRef
+  } else {
+    cell_ref = XLSX.utils.encode_cell({ c: col, r: row })
   }
 
-export class Cell extends Component {
-
-
-  componentWillMount () {      
-   // debugger
-    if (this.context && this.context.getCell) {  
-       var { sheet = 'Sheet1' } = this.context 
-    this.context.getCell(mapCell(this.props, sheet))
+  if (colSpan || rowSpan) {
+    colSpan = colSpan || 1
+    rowSpan = rowSpan || 1
+    merge = {
+      s: { c: col, r: row },
+      e: { c: col + colSpan - 1, r: row + rowSpan - 1 }
     }
-   //  debugger
+  }
+
+  var mapped = {
+    t: type,
+    s: cellStyle
+    // c: [{a: 'comment.author', t: 'comment.t', r: 'comment.r'}]
+  }
+  // formulas not supported at the mo
+  if (formula) {
+    mapped.f = children
+  } else {
+    mapped.v = children
+  }
+
+  return {
+    cellRef: cell_ref,
+    data: mapped,
+    merge: merge,
+    col: col,
+    row: row,
+    sheet: sheet,
+    width: width
+  }
+}
+
+export class Cell extends Component {
+  componentWillMount () {
+    // debugger
+    if (this.context && this.context.getCell) {
+      var { sheet = 'Sheet1' } = this.context
+      this.context.getCell(mapCell(this.props, sheet))
+    }
+    //  debugger
     // if (this.context && this.context.getCell) this.context.getCell(this.mapCell(this.props))
-   // debugger
-  // this._reactInternalInstance.mountComponent = function() {return '';}
+    // debugger
+    // this._reactInternalInstance.mountComponent = function() {return '';}
   }
 
   componentDidMount () {
-   // debugger
+    // debugger
     // if (this.context && this.context.getCell) this.context.getCell(this.mapCell(this.props))
-   // debugger
-  // this._reactInternalInstance.mountComponent = function() {return '';}
+    // debugger
+    // this._reactInternalInstance.mountComponent = function() {return '';}
   }
 
   // shouldComponentUpdate (nextProps, nextState) {
@@ -66,11 +85,9 @@ export class Cell extends Component {
   //   return updated
   // }
 
-
-
   render () {
-      const { children, style } = this.props
-      return <div style={style}>{children}</div>
+    const { children, style } = this.props
+    return <div style={style}>{children}</div>
   }
 }
 
