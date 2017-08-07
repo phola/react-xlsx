@@ -7,7 +7,6 @@ export const workBookFromFile = (file, callback) => {
     var data = e.target.result
 
     var workbook
-
     /* if binary string, read with type 'binary' */
     workbook = XLSX.read(data, { type: 'binary' })
 
