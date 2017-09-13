@@ -15,6 +15,9 @@ export const workBookFromFile = (file, callback) => {
   reader.readAsBinaryString(file)
 }
 
+export const sheetToJson = (sheet, opts) =>
+  XLSX.utils.sheet_to_json(sheet, opts)
+
 /* processing array buffers, only required for readAsArrayBuffer */
 function fixdata (data) {
   var o = '', l = 0, w = 10240
